@@ -134,7 +134,7 @@ module pc_reg(input cpu_clk, input stall, input [31:0] new_pc, output [31:0] pc,
 		if (!stall && !rst)
 			pcnter <= new_pc;
 		else if (rst)
-			pcnter <= 32'h00000048;
+			pcnter <= 32'h00000034;
 	end
 endmodule
 
@@ -186,7 +186,7 @@ module RISC_V_Processor(switch_in, button_in, led_out, cs_out, decimal_out, digi
 	wire [31:0] clock32_new;
 	wire cpu_clk;
 	assign clock32_new = clock32 + 1;
-	assign cpu_clk = clock32[5];
+	assign cpu_clk = clock32[0];
 /******************************/
 	reg [15:0] state; // 0: IF 1:ID 2:EX 3:MEM 4:WB
 	wire [15:0] new_state;
@@ -196,6 +196,7 @@ module RISC_V_Processor(switch_in, button_in, led_out, cs_out, decimal_out, digi
 	wire is_end;
 	
 	reg init_bit;
+	reg [31:0] led_word;
 	
 	
 /******Mem Bus******/
@@ -268,7 +269,7 @@ module RISC_V_Processor(switch_in, button_in, led_out, cs_out, decimal_out, digi
 	assign reg_stall = (state != 4);
 	
 	register
-		reg0(cpu_clk, rst, reg_stall, reg_rs1, reg_rs2, reg_rd, reg_wb, reg_sig_wb, reg_r1, reg_r2, led_out);
+		reg0(cpu_clk, rst, reg_stall, reg_rs1, reg_rs2, reg_rd, reg_wb, reg_sig_wb, reg_r1, reg_r2);
 		
 /***********************/
 
@@ -453,11 +454,11 @@ module RISC_V_Processor(switch_in, button_in, led_out, cs_out, decimal_out, digi
 			1
 		) : 
 		(
-			id_sig_load
+			id_sig_load && !(mem_addr[31:14])
 		)
 	);
 	
-	assign mem_store = (id_sig_store && (state == 3));
+	assign mem_store = (id_sig_store && !(mem_addr[31:14]) && ((state == 3) || (state == 2)));
 	
 	assign mem_data = id_reg_r2;
 	
@@ -508,7 +509,7 @@ module RISC_V_Processor(switch_in, button_in, led_out, cs_out, decimal_out, digi
 		(ex_sig_jump) ? (ex_pc_4) : //JAL return pc+4
 		(
 		(ex_sig_load) ? (mem_out) : // Load instructions
-		(ex_alu_res) // Rtype or Itype
+		(ex_wire_alu_res) // Rtype or Itype
 		)
 		)
 		)
@@ -522,6 +523,10 @@ module RISC_V_Processor(switch_in, button_in, led_out, cs_out, decimal_out, digi
 			mem_reg_rd <= mem_wire_reg_rd;
 			mem_reg_wb <= mem_wire_reg_wb;
 			mem_reg_sig_wb <= mem_wire_reg_sig_wb;
+			if (mem_addr == 32'h00004000 && ex_sig_store)
+			begin
+				led_word <= mem_data;
+			end
 		end
 	end
 /*********************/
@@ -547,44 +552,56 @@ module RISC_V_Processor(switch_in, button_in, led_out, cs_out, decimal_out, digi
 //	assign led_out[2:0] = state[2:0];
 //	assign led_out[7:3] = mem_reg_rd;
 //	assign led_out[8] = reg_sig_wb && (!reg_stall);
+	assign led_out[7:0] = (
+		switch_in[1] ?
+		(switch_in[0] ? (led_word[31:24]) : (led_word[23:16])):
+		(switch_in[0] ? (led_word[15:8]) : (led_word[7:0]))
+	);
 	assign led_out[9] = cpu_clk;
 
-	assign digit_write[7:0] = (
-	(switch_in[3:0] == 4'b0000) ? id_inst[7:0] : (
-	(switch_in[3:0] == 4'b0001) ? reg_r1[7:0] : (
-	(switch_in[3:0] == 4'b0010) ? reg_r2[7:0] : (
-	(switch_in[3:0] == 4'b0011) ? mem_reg_wb[7:0] : (
-	(switch_in[3:0] == 4'b0100) ? reg_rs1 : (
-	(switch_in[3:0] == 4'b0101) ? reg_rs2 : (
-	(switch_in[3:0] == 4'b0110) ? mem_reg_rd : (
-	(switch_in[3:0] == 4'b0111) ? pc :(
-	(switch_in[3:0] == 4'b1000) ? ex_wire_alu_in1 :(
-	(switch_in[3:0] == 4'b1001) ? ex_wire_alu_in2 :(
-	(switch_in[3:0] == 4'b1010) ? ex_alu_res :(
-	(switch_in[3:0] == 4'b1011) ? mem_addr :(
-	(switch_in[3:0] == 4'b1100) ? mem_data :(
-	(switch_in[3:0] == 4'b1101) ? mem_out :(
-	(switch_in[3:0] == 4'b1110) ? mem_wire_opcode :(
-	(switch_in[3:0] == 4'b1111) ? ex_imm : 0
-	))))))))))))))));
-	assign digit_write[15:8] = (
-	(switch_in[7:4] == 4'b0000) ? id_inst[7:0] : (
-	(switch_in[7:4] == 4'b0001) ? reg_r1[7:0] : (
-	(switch_in[7:4] == 4'b0010) ? reg_r2[7:0] : (
-	(switch_in[7:4] == 4'b0011) ? mem_reg_wb[7:0] : (
-	(switch_in[7:4] == 4'b0100) ? reg_rs1 : (
-	(switch_in[7:4] == 4'b0101) ? reg_rs2 : (
-	(switch_in[7:4] == 4'b0110) ? mem_reg_rd : (
-	(switch_in[7:4] == 4'b0111) ? pc :(
-	(switch_in[7:4] == 4'b1000) ? ex_wire_alu_in1 :(
-	(switch_in[7:4] == 4'b1001) ? ex_wire_alu_in2 :(
-	(switch_in[7:4] == 4'b1010) ? ex_alu_res :(
-	(switch_in[7:4] == 4'b1011) ? mem_addr :(
-	(switch_in[7:4] == 4'b1100) ? mem_data :(
-	(switch_in[7:4] == 4'b1101) ? mem_out :(
-	(switch_in[7:4] == 4'b1110) ? mem_wire_opcode :(
-	(switch_in[7:4] == 4'b1111) ? ex_imm : 0
-	))))))))))))))));
+//	assign digit_write[7:0] = (
+//	(switch_in[3:0] == 4'b0000) ? id_inst[7:0] : (
+//	(switch_in[3:0] == 4'b0001) ? reg_r1[7:0] : (
+//	(switch_in[3:0] == 4'b0010) ? reg_r2[7:0] : (
+//	(switch_in[3:0] == 4'b0011) ? mem_reg_wb[7:0] : (
+//	(switch_in[3:0] == 4'b0100) ? reg_rs1 : (
+//	(switch_in[3:0] == 4'b0101) ? reg_rs2 : (
+//	(switch_in[3:0] == 4'b0110) ? mem_reg_rd : (
+//	(switch_in[3:0] == 4'b0111) ? pc :(
+//	(switch_in[3:0] == 4'b1000) ? ex_wire_alu_in1 :(
+//	(switch_in[3:0] == 4'b1001) ? ex_wire_alu_in2 :(
+//	(switch_in[3:0] == 4'b1010) ? ex_alu_res :(
+//	(switch_in[3:0] == 4'b1011) ? mem_addr :(
+//	(switch_in[3:0] == 4'b1100) ? mem_data :(
+//	(switch_in[3:0] == 4'b1101) ? mem_out :(
+//	(switch_in[3:0] == 4'b1110) ? mem_wire_opcode :(
+//	(switch_in[3:0] == 4'b1111) ? ex_imm : 0
+//	))))))))))))))));
+//	assign digit_write[15:8] = (
+//	(switch_in[7:4] == 4'b0000) ? id_inst[7:0] : (
+//	(switch_in[7:4] == 4'b0001) ? reg_r1[7:0] : (
+//	(switch_in[7:4] == 4'b0010) ? reg_r2[7:0] : (
+//	(switch_in[7:4] == 4'b0011) ? mem_reg_wb[7:0] : (
+//	(switch_in[7:4] == 4'b0100) ? reg_rs1 : (
+//	(switch_in[7:4] == 4'b0101) ? reg_rs2 : (
+//	(switch_in[7:4] == 4'b0110) ? mem_reg_rd : (
+//	(switch_in[7:4] == 4'b0111) ? pc :(
+//	(switch_in[7:4] == 4'b1000) ? ex_wire_alu_in1 :(
+//	(switch_in[7:4] == 4'b1001) ? ex_wire_alu_in2 :(
+//	(switch_in[7:4] == 4'b1010) ? ex_alu_res :(
+//	(switch_in[7:4] == 4'b1011) ? mem_addr :(
+//	(switch_in[7:4] == 4'b1100) ? mem_data :(
+//	(switch_in[7:4] == 4'b1101) ? mem_out :(
+//	(switch_in[7:4] == 4'b1110) ? mem_wire_opcode :(
+//	(switch_in[7:4] == 4'b1111) ? ex_imm : 0
+//	))))))))))))))));
+	assign digit_write[15:0] = (
+	(switch_in == 0) ? led_word[15:0]: (
+	(switch_in == 1) ? led_word[31:16]: (
+	(switch_in == 2) ? pc: 0
+	)
+	
+	));
 	
 	assign is_end = (pc == 32'b11111111111111111111111111111111);
 	

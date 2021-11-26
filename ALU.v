@@ -28,7 +28,7 @@ module alu(
 	assign Ires[4] = (in1 ^ in2); //XORI
 	assign Ires[5] = srxi[in2[4:0]]; //SRXI
 	assign Ires[6] = (in1 | in2); //ORI
-	assign Ires[7] = (in2 & in2); //ANDI
+	assign Ires[7] = (in1 & in2); //ANDI
 	
 	wire [31:0] Rres [7:0];
 	
@@ -39,7 +39,63 @@ module alu(
 	assign Rres[4] = (in1 ^ in2); //XOR
 	assign Rres[5] = srxi[in2[4:0]]; //SRX
 	assign Rres[6] = (in1 | in2); //OR
-	assign Rres[7] = (in2 & in2); //AND
+	assign Rres[7] = (in1 & in2); //AND
+	
+	wire [31:0] MULDIVres [3:0];
+	wire [63:0] u64in1;
+	wire [63:0] s64in1;
+	wire [63:0] u64in2;
+	wire [63:0] s64in2;
+	assign u64in1[31:0] = in1;
+	assign u64in1[63:32] = 0;
+	assign u64in2[31:0] = in2;
+	assign u64in2[63:32] = 0;
+	assign s64in1[31:0] = in1;
+	assign s64in1[63:32] = (in1[31] ? 32'hffffffff : 0);
+	assign s64in2[31:0] = in2;
+	assign s64in2[63:32] = (in2[31] ? 32'hffffffff : 0);
+	
+	wire [63:0] prodss;
+	wire [63:0] prodsu;
+	wire [63:0] produu;
+	assign prodss = $signed(s64in1) * $signed(s64in2);
+	assign prodsu = $signed(s64in1) * $unsigned(u64in2);
+	assign produu = $unsigned(u64in1) * $unsigned(u64in2);
+	wire [31:0] divres;
+	wire [31:0] remres;
+//	assign divres = $signed(in1) / $signed(in2);
+//	assign divures = $unsigned(in1) / $unsigned(in2);
+//	assign remres = $signed(in1) % $signed(in2);
+//	assign remures = $unsigned(in1) % $unsigned(in2);
+	wire [31:0] dividend;
+	wire [31:0] divisor;
+	
+	assign divres = $unsigned(dividend) / $unsigned(divisor);
+	assign remres = $unsigned(dividend) - $unsigned(divres) * $unsigned(divisor);
+	wire dividend_neg;
+	wire divisor_neg;
+	assign dividend_neg = in1[31] && !funct3[0];
+	assign divisor_neg = in2[31] && !funct3[0];
+	assign dividend = dividend_neg ? -in1 : in1;
+	assign divisor = divisor_neg ? -in2 : in2;
+	wire [31:0] divremres;
+	assign divremres = (
+		funct3[1] ?
+		((dividend_neg) ? -remres : remres) :
+		((dividend_neg ^ divisor_neg) ? -divres : divres)
+		);
+	
+	
+//	assign divres = 0;
+//	assign divures = 0;
+//	assign remres = 0;
+//	assign remures = 0;
+	
+	assign MULDIVres[0] = produu[31:0]; //MUL
+	assign MULDIVres[1] = prodss[63:32]; //MULH
+	assign MULDIVres[2] = prodsu[63:32]; //MULHSU
+	assign MULDIVres[3] = produu[63:32]; //MULHU
+	
 	
 	wire [31:0] Bres [7:0];
 	
@@ -55,7 +111,7 @@ module alu(
 	
 	assign res = ((opcode == 7'b0000011 || opcode == 7'b0100011) ? addv : ( //Load and Store
 		(opcode == 7'b0010011) ? Ires[funct3] : ( //Immediate Computation
-		(opcode == 7'b0110011) ? Rres[funct3] : ( //Rtype Computation
+		(opcode == 7'b0110011) ? (funct7[0] ? (funct3[2] ? divremres : MULDIVres[funct3[1:0]]) : Rres[funct3]) : ( //Rtype Computation
 		(opcode == 7'b1100011) ? Bres[funct3] : ( //Btype 
 			0
 		)

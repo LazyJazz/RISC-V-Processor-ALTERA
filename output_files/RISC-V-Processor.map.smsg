@@ -1,1 +1,1 @@
-Warning (10268): Verilog HDL information at RISC_V_Processor.v(620): always construct contains both blocking and non-blocking assignments File: C:/Users/zijia/Desktop/Homework/2021 Fall/Fundamentals of Digital Electronics/Lab4/RISC-V-Processor/RISC_V_Processor.v Line: 620
+Warning (10268): Verilog HDL information at RISC_V_Processor.v(637): always construct contains both blocking and non-blocking assignments File: C:/Users/zijia/Desktop/Homework/2021 Fall/Fundamentals of Digital Electronics/Lab4/RISC-V-Processor-ALTERA/RISC_V_Processor.v Line: 637

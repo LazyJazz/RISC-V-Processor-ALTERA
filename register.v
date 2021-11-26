@@ -8,22 +8,10 @@ module register(
 	input [31:0] wb,
 	input wb_sig,
 	output [31:0] r1,
-	output [31:0] r2,
-	output [8:0] led_out);
+	output [31:0] r2);
 	
 	
 	reg [31:0] xx[31:0];
-	
-	//assign led_out[9] = !(!xx[1]);
-	assign led_out[8] = !(!xx[2]);
-	assign led_out[7] = !(!xx[8]);
-	assign led_out[6] = !(!xx[14]);
-	assign led_out[5] = !(!xx[15]);
-	assign led_out[4] = !(!xx[3]);
-	assign led_out[3] = !(!xx[4]);
-	assign led_out[2] = !(!xx[5]);
-	assign led_out[1] = !(!xx[6]);
-	assign led_out[0] = !(!xx[7]);
 	
 	assign r1 = rs1 ? xx[rs1] : 0;
 	assign r2 = rs2 ? xx[rs2] : 0;
@@ -33,7 +21,7 @@ module register(
 		if (rst)
 		begin
 			xx[1] <= 32'b11111111111111111111111111111111;
-			xx[2] <= 32'h00000FF0;
+			xx[2] <= 32'h00003FFC;
 			xx[3] <= 0;
 			xx[4] <= 0;
 			xx[5] <= 0;

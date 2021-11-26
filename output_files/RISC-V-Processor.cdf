@@ -4,7 +4,7 @@ JedecChain;
 	DefaultMfr(6E);
 
 	P ActionCode(Cfg)
-		Device PartName(EP4CE6E22) Path("C:/Users/zijia/Desktop/Homework/2021 Fall/Fundamentals of Digital Electronics/Lab4/RISC-V-Processor/output_files/") File("RISC-V-Processor.sof") MfrSpec(OpMask(1));
+		Device PartName(EP4CE6E22) Path("C:/Users/zijia/Desktop/Homework/2021 Fall/Fundamentals of Digital Electronics/Lab4/RISC-V-Processor-ALTERA/output_files/") File("RISC-V-Processor.sof") MfrSpec(OpMask(1));
 
 ChainEnd;
 

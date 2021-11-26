@@ -9,8 +9,9 @@ module memory(
 	output[31:0] q,
 	output mem_stall
 	);
-	reg write_stall;
 	
+	reg write_stall;
+	reg [31:0] write_data;
 	
 	
 	wire [31:0] store_byte;
@@ -26,23 +27,36 @@ module memory(
 	wire [31:0] ram_q;
 	wire [31:0] store_data;
 	
-	assign mem_stall = write_stall;
+	assign mem_stall = 0;
 	
-	assign store_byte[31:24] = ((addr[1:0] == 2'b11) ? data[7:0]: ram_q[31:24]);
-	assign store_byte[23:16] = ((addr[1:0] == 2'b10) ? data[7:0]: ram_q[23:16]);
-	assign store_byte[15:8] = ((addr[1:0] == 2'b01) ? data[7:0]: ram_q[15:8]);
-	assign store_byte[7:0] = ((addr[1:0] == 2'b00) ? data[7:0]: ram_q[7:0]);
+//	assign store_byte[31:24] = ((addr[1:0] == 2'b11) ? data[7:0]: ram_q[31:24]);
+//	assign store_byte[23:16] = ((addr[1:0] == 2'b10) ? data[7:0]: ram_q[23:16]);
+//	assign store_byte[15:8] = ((addr[1:0] == 2'b01) ? data[7:0]: ram_q[15:8]);
+//	assign store_byte[7:0] = ((addr[1:0] == 2'b00) ? data[7:0]: ram_q[7:0]);
+	assign store_byte[31:24] = ((addr[1:0] == 2'b11) ? write_data[7:0]: ram_q[31:24]);
+	assign store_byte[23:16] = ((addr[1:0] == 2'b10) ? write_data[7:0]: ram_q[23:16]);
+	assign store_byte[15:8] = ((addr[1:0] == 2'b01) ? write_data[7:0]: ram_q[15:8]);
+	assign store_byte[7:0] = ((addr[1:0] == 2'b00) ? write_data[7:0]: ram_q[7:0]);
 	
 	assign store_half[31:16] = (addr[1] ? data[15:0] : ram_q[31:16]);
 	assign store_half[15:0] = (addr[1] ? ram_q[15:0] : data[15:0]);
 	
 	assign store_word = data;
 	
-	assign load_byte[31:8] = ((!type[2]) && ram_q[7]) ? 24'b111111111111111111111111 : 0;
-	assign load_byte[7:0] = ram_q[7:0];
+	wire [7:0] lbyte;
+	assign lbyte[7:0] = (addr[1] ?
+			(addr[0] ? ram_q[31:24] : ram_q[23:16]) :
+			(addr[0] ? ram_q[15:8] : ram_q[7:0])
+			);
 	
-	assign load_half[31:16] = ((!type[2]) && ram_q[15]) ? 16'b1111111111111111 : 0;
-	assign load_half[15:0] = ram_q[15:0];
+	assign load_byte[31:8] = ((!type[2]) && lbyte[7]) ? 24'b111111111111111111111111 : 0;
+	assign load_byte[7:0] = lbyte[7:0];
+	
+	wire [15:0] lhalf;
+	assign lhalf[15:0] = (addr[1] ? ram_q[31:16] : ram_q[15:0]);
+	
+	assign load_half[31:16] = ((!type[2]) && lhalf[15]) ? 16'b1111111111111111 : 0;
+	assign load_half[15:0] = lhalf[15:0];
 	
 	assign load_word = ram_q;
 	
@@ -79,7 +93,10 @@ module memory(
 	always @ (posedge cpu_clk)
 	begin
 		if (sig_store && (type[1:0] != 2'b10) && !write_stall)
+		begin
 			write_stall <= 1;
+			write_data <= data;
+		end
 		else
 			write_stall <= 0;
 		buffer_sig_load <= sig_load;

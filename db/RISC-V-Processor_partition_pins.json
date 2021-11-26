@@ -36,10 +36,6 @@
 					"strict" : false
 				},
 				{
-					"name" : "led_out[8]",
-					"strict" : false
-				},
-				{
 					"name" : "led_out[9]",
 					"strict" : false
 				},
@@ -100,19 +96,19 @@
 					"strict" : false
 				},
 				{
-					"name" : "switch_in[0]",
-					"strict" : false
-				},
-				{
 					"name" : "switch_in[1]",
 					"strict" : false
 				},
 				{
-					"name" : "switch_in[3]",
+					"name" : "switch_in[0]",
 					"strict" : false
 				},
 				{
 					"name" : "switch_in[2]",
+					"strict" : false
+				},
+				{
+					"name" : "switch_in[3]",
 					"strict" : false
 				},
 				{
@@ -124,19 +120,19 @@
 					"strict" : false
 				},
 				{
-					"name" : "switch_in[7]",
-					"strict" : false
-				},
-				{
 					"name" : "switch_in[6]",
 					"strict" : false
 				},
 				{
-					"name" : "button_in[0]",
+					"name" : "switch_in[7]",
 					"strict" : false
 				},
 				{
 					"name" : "clk",
+					"strict" : false
+				},
+				{
+					"name" : "button_in[0]",
 					"strict" : false
 				}
 			]

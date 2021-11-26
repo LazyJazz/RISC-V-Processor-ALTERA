@@ -1,5 +1,5 @@
 Flow report for RISC-V-Processor
-Fri Nov 26 20:46:58 2021
+Sat Nov 27 01:33:54 2021
 Quartus Prime Version 21.1.0 Build 842 10/21/2021 SJ Lite Edition
 
 
@@ -41,21 +41,21 @@ https://fpgasoftware.intel.com/eula.
 +----------------------------------------------------------------------------------+
 ; Flow Summary                                                                     ;
 +------------------------------------+---------------------------------------------+
-; Flow Status                        ; Successful - Fri Nov 26 20:46:58 2021       ;
+; Flow Status                        ; Successful - Sat Nov 27 01:33:54 2021       ;
 ; Quartus Prime Version              ; 21.1.0 Build 842 10/21/2021 SJ Lite Edition ;
 ; Revision Name                      ; RISC-V-Processor                            ;
 ; Top-level Entity Name              ; RISC_V_Processor                            ;
 ; Family                             ; Cyclone IV E                                ;
 ; Device                             ; EP4CE6E22C8                                 ;
 ; Timing Models                      ; Final                                       ;
-; Total logic elements               ; 3,477 / 6,272 ( 55 % )                      ;
-;     Total combinational functions  ; 3,051 / 6,272 ( 49 % )                      ;
-;     Dedicated logic registers      ; 1,556 / 6,272 ( 25 % )                      ;
-; Total registers                    ; 1556                                        ;
+; Total logic elements               ; 5,465 / 6,272 ( 87 % )                      ;
+;     Total combinational functions  ; 5,285 / 6,272 ( 84 % )                      ;
+;     Dedicated logic registers      ; 1,593 / 6,272 ( 25 % )                      ;
+; Total registers                    ; 1593                                        ;
 ; Total pins                         ; 39 / 92 ( 42 % )                            ;
 ; Total virtual pins                 ; 0                                           ;
 ; Total memory bits                  ; 131,072 / 276,480 ( 47 % )                  ;
-; Embedded Multiplier 9-bit elements ; 0 / 30 ( 0 % )                              ;
+; Embedded Multiplier 9-bit elements ; 30 / 30 ( 100 % )                           ;
 ; Total PLLs                         ; 0 / 2 ( 0 % )                               ;
 +------------------------------------+---------------------------------------------+
 
@@ -65,7 +65,7 @@ https://fpgasoftware.intel.com/eula.
 +-------------------+---------------------+
 ; Option            ; Setting             ;
 +-------------------+---------------------+
-; Start date & time ; 11/26/2021 20:46:24 ;
+; Start date & time ; 11/27/2021 01:33:10 ;
 ; Main task         ; Compilation         ;
 ; Revision Name     ; RISC-V-Processor    ;
 +-------------------+---------------------+
@@ -76,7 +76,7 @@ https://fpgasoftware.intel.com/eula.
 +-------------------------------------+----------------------------------------+------------------+------------------+-----------------------------------+
 ; Assignment Name                     ; Value                                  ; Default Value    ; Entity Name      ; Section Id                        ;
 +-------------------------------------+----------------------------------------+------------------+------------------+-----------------------------------+
-; COMPILER_SIGNATURE_ID               ; 1098169266701.163793078412104          ; --               ; --               ; --                                ;
+; COMPILER_SIGNATURE_ID               ; 1098169266701.163794799032828          ; --               ; --               ; --                                ;
 ; EDA_GENERATE_FUNCTIONAL_NETLIST     ; Off                                    ; --               ; --               ; eda_board_design_timing           ;
 ; EDA_GENERATE_FUNCTIONAL_NETLIST     ; Off                                    ; --               ; --               ; eda_board_design_boundary_scan    ;
 ; EDA_GENERATE_FUNCTIONAL_NETLIST     ; Off                                    ; --               ; --               ; eda_board_design_signal_integrity ;
@@ -103,12 +103,12 @@ https://fpgasoftware.intel.com/eula.
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
 ; Module Name          ; Elapsed Time ; Average Processors Used ; Peak Virtual Memory ; Total CPU Time (on all processors) ;
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
-; Analysis & Synthesis ; 00:00:10     ; 1.0                     ; 4906 MB             ; 00:00:18                           ;
-; Fitter               ; 00:00:16     ; 1.4                     ; 6626 MB             ; 00:00:31                           ;
-; Assembler            ; 00:00:00     ; 1.0                     ; 4719 MB             ; 00:00:01                           ;
-; Timing Analyzer      ; 00:00:02     ; 1.8                     ; 4963 MB             ; 00:00:03                           ;
-; EDA Netlist Writer   ; 00:00:01     ; 1.0                     ; 4660 MB             ; 00:00:01                           ;
-; Total                ; 00:00:29     ; --                      ; --                  ; 00:00:54                           ;
+; Analysis & Synthesis ; 00:00:14     ; 1.0                     ; 4922 MB             ; 00:00:21                           ;
+; Fitter               ; 00:00:21     ; 1.4                     ; 6621 MB             ; 00:00:49                           ;
+; Assembler            ; 00:00:00     ; 1.0                     ; 4733 MB             ; 00:00:01                           ;
+; Timing Analyzer      ; 00:00:03     ; 1.9                     ; 5053 MB             ; 00:00:04                           ;
+; EDA Netlist Writer   ; 00:00:01     ; 1.0                     ; 4673 MB             ; 00:00:01                           ;
+; Total                ; 00:00:39     ; --                      ; --                  ; 00:01:16                           ;
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
 
 
