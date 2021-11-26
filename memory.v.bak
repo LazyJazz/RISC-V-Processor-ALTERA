@@ -1,0 +1,3 @@
+module memory(input cpu_clk, input clk, input [31:0] addr, input[31:0] data, output[31:0] q, output mem_stall);
+
+endmodule

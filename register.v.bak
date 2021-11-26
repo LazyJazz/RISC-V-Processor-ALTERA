@@ -1,0 +1,22 @@
+module register(
+	input cpu_clk,
+	input stall,
+	input [4:0] rs1, 
+	input [4:0] rs2, 
+	input [4:0] rd,
+	input [31:0] wb,
+	input wb_sig,
+	output [31:0] r1,
+	output [31:0] r2);
+	
+	reg [31:0] xx[31:1];
+	
+	assign r1 = xx[rs1];
+	assign r2 = xx[rs2];
+	
+	always @ (negedge cpu_clk)
+	begin
+		if (wb_sig && !stall)
+			xx[rd] <= wb;
+	end
+endmodule

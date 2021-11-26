@@ -1,0 +1,3 @@
+module RISC_V_Processor(input clk, input [31:0] value, input error, input div, output [7: 0] digit_channel, output [3:0] cs_out);
+
+endmodule

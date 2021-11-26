@@ -1,0 +1,145 @@
+{
+	"partitions" : [
+		{
+			"name" : "Top",
+			"pins" : [
+				{
+					"name" : "led_out[0]",
+					"strict" : false
+				},
+				{
+					"name" : "led_out[1]",
+					"strict" : false
+				},
+				{
+					"name" : "led_out[2]",
+					"strict" : false
+				},
+				{
+					"name" : "led_out[3]",
+					"strict" : false
+				},
+				{
+					"name" : "led_out[4]",
+					"strict" : false
+				},
+				{
+					"name" : "led_out[5]",
+					"strict" : false
+				},
+				{
+					"name" : "led_out[6]",
+					"strict" : false
+				},
+				{
+					"name" : "led_out[7]",
+					"strict" : false
+				},
+				{
+					"name" : "led_out[8]",
+					"strict" : false
+				},
+				{
+					"name" : "led_out[9]",
+					"strict" : false
+				},
+				{
+					"name" : "cs_out[0]",
+					"strict" : false
+				},
+				{
+					"name" : "cs_out[1]",
+					"strict" : false
+				},
+				{
+					"name" : "cs_out[2]",
+					"strict" : false
+				},
+				{
+					"name" : "cs_out[3]",
+					"strict" : false
+				},
+				{
+					"name" : "decimal_out[0]",
+					"strict" : false
+				},
+				{
+					"name" : "decimal_out[1]",
+					"strict" : false
+				},
+				{
+					"name" : "decimal_out[2]",
+					"strict" : false
+				},
+				{
+					"name" : "digit_out[1]",
+					"strict" : false
+				},
+				{
+					"name" : "digit_out[2]",
+					"strict" : false
+				},
+				{
+					"name" : "digit_out[3]",
+					"strict" : false
+				},
+				{
+					"name" : "digit_out[4]",
+					"strict" : false
+				},
+				{
+					"name" : "digit_out[5]",
+					"strict" : false
+				},
+				{
+					"name" : "digit_out[6]",
+					"strict" : false
+				},
+				{
+					"name" : "digit_out[7]",
+					"strict" : false
+				},
+				{
+					"name" : "switch_in[0]",
+					"strict" : false
+				},
+				{
+					"name" : "switch_in[1]",
+					"strict" : false
+				},
+				{
+					"name" : "switch_in[3]",
+					"strict" : false
+				},
+				{
+					"name" : "switch_in[2]",
+					"strict" : false
+				},
+				{
+					"name" : "switch_in[4]",
+					"strict" : false
+				},
+				{
+					"name" : "switch_in[5]",
+					"strict" : false
+				},
+				{
+					"name" : "switch_in[7]",
+					"strict" : false
+				},
+				{
+					"name" : "switch_in[6]",
+					"strict" : false
+				},
+				{
+					"name" : "button_in[0]",
+					"strict" : false
+				},
+				{
+					"name" : "clk",
+					"strict" : false
+				}
+			]
+		}
+	]
+}
