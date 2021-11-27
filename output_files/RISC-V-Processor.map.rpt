@@ -1,5 +1,5 @@
 Analysis & Synthesis report for RISC-V-Processor
-Sat Nov 27 01:33:24 2021
+Sat Nov 27 16:30:29 2021
 Quartus Prime Version 21.1.0 Build 842 10/21/2021 SJ Lite Edition
 
 
@@ -68,15 +68,15 @@ https://fpgasoftware.intel.com/eula.
 +----------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                     ;
 +------------------------------------+---------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Sat Nov 27 01:33:24 2021       ;
+; Analysis & Synthesis Status        ; Successful - Sat Nov 27 16:30:29 2021       ;
 ; Quartus Prime Version              ; 21.1.0 Build 842 10/21/2021 SJ Lite Edition ;
 ; Revision Name                      ; RISC-V-Processor                            ;
 ; Top-level Entity Name              ; RISC_V_Processor                            ;
 ; Family                             ; Cyclone IV E                                ;
-; Total logic elements               ; 6,495                                       ;
-;     Total combinational functions  ; 5,285                                       ;
-;     Dedicated logic registers      ; 1,593                                       ;
-; Total registers                    ; 1593                                        ;
+; Total logic elements               ; 6,547                                       ;
+;     Total combinational functions  ; 5,337                                       ;
+;     Dedicated logic registers      ; 1,624                                       ;
+; Total registers                    ; 1624                                        ;
 ; Total pins                         ; 39                                          ;
 ; Total virtual pins                 ; 0                                           ;
 ; Total memory bits                  ; 131,072                                     ;
@@ -255,20 +255,20 @@ https://fpgasoftware.intel.com/eula.
 +---------------------------------------------+------------+
 ; Resource                                    ; Usage      ;
 +---------------------------------------------+------------+
-; Estimated Total logic elements              ; 6,495      ;
+; Estimated Total logic elements              ; 6,547      ;
 ;                                             ;            ;
-; Total combinational functions               ; 5285       ;
+; Total combinational functions               ; 5337       ;
 ; Logic element usage by number of LUT inputs ;            ;
-;     -- 4 input functions                    ; 3006       ;
-;     -- 3 input functions                    ; 1813       ;
-;     -- <=2 input functions                  ; 466        ;
+;     -- 4 input functions                    ; 3114       ;
+;     -- 3 input functions                    ; 1789       ;
+;     -- <=2 input functions                  ; 434        ;
 ;                                             ;            ;
 ; Logic elements by mode                      ;            ;
-;     -- normal mode                          ; 3756       ;
-;     -- arithmetic mode                      ; 1529       ;
+;     -- normal mode                          ; 3778       ;
+;     -- arithmetic mode                      ; 1559       ;
 ;                                             ;            ;
-; Total registers                             ; 1593       ;
-;     -- Dedicated logic registers            ; 1593       ;
+; Total registers                             ; 1624       ;
+;     -- Dedicated logic registers            ; 1624       ;
 ;     -- I/O registers                        ; 0          ;
 ;                                             ;            ;
 ; I/O pins                                    ; 39         ;
@@ -277,9 +277,9 @@ https://fpgasoftware.intel.com/eula.
 ; Embedded Multiplier 9-bit elements          ; 30         ;
 ;                                             ;            ;
 ; Maximum fan-out node                        ; clock32[0] ;
-; Maximum fan-out                             ; 1590       ;
-; Total fan-out                               ; 24208      ;
-; Average fan-out                             ; 3.45       ;
+; Maximum fan-out                             ; 1591       ;
+; Total fan-out                               ; 24598      ;
+; Average fan-out                             ; 3.46       ;
 +---------------------------------------------+------------+
 
 
@@ -288,8 +288,8 @@ https://fpgasoftware.intel.com/eula.
 +-----------------------------------------------+---------------------+---------------------------+-------------+--------------+---------+-----------+------+--------------+--------------------------------------------------------------------------------------------------------------------------------------------------+-----------------------+--------------+
 ; Compilation Hierarchy Node                    ; Combinational ALUTs ; Dedicated Logic Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name                                                                                                                              ; Entity Name           ; Library Name ;
 +-----------------------------------------------+---------------------+---------------------------+-------------+--------------+---------+-----------+------+--------------+--------------------------------------------------------------------------------------------------------------------------------------------------+-----------------------+--------------+
-; |RISC_V_Processor                             ; 5285 (435)          ; 1593 (523)                ; 131072      ; 30           ; 0       ; 15        ; 39   ; 0            ; |RISC_V_Processor                                                                                                                                ; RISC_V_Processor      ; work         ;
-;    |alu:alu0|                                 ; 3017 (1037)         ; 0 (0)                     ; 0           ; 30           ; 0       ; 15        ; 0    ; 0            ; |RISC_V_Processor|alu:alu0                                                                                                                       ; alu                   ; work         ;
+; |RISC_V_Processor                             ; 5337 (477)          ; 1624 (554)                ; 131072      ; 30           ; 0       ; 15        ; 39   ; 0            ; |RISC_V_Processor                                                                                                                                ; RISC_V_Processor      ; work         ;
+;    |alu:alu0|                                 ; 3018 (1038)         ; 0 (0)                     ; 0           ; 30           ; 0       ; 15        ; 0    ; 0            ; |RISC_V_Processor|alu:alu0                                                                                                                       ; alu                   ; work         ;
 ;       |lpm_divide:Div0|                       ; 1117 (0)            ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |RISC_V_Processor|alu:alu0|lpm_divide:Div0                                                                                                       ; lpm_divide            ; work         ;
 ;          |lpm_divide_hkm:auto_generated|      ; 1117 (0)            ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |RISC_V_Processor|alu:alu0|lpm_divide:Div0|lpm_divide_hkm:auto_generated                                                                         ; lpm_divide_hkm        ; work         ;
 ;             |sign_div_unsign_9nh:divider|     ; 1117 (0)            ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |RISC_V_Processor|alu:alu0|lpm_divide:Div0|lpm_divide_hkm:auto_generated|sign_div_unsign_9nh:divider                                             ; sign_div_unsign_9nh   ; work         ;
@@ -324,7 +324,7 @@ https://fpgasoftware.intel.com/eula.
 ;    |output_hex_ascii:out_number|              ; 124 (93)            ; 36 (36)                   ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |RISC_V_Processor|output_hex_ascii:out_number                                                                                                    ; output_hex_ascii      ; work         ;
 ;       |ascii_to_digit:comb_96|                ; 31 (31)             ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |RISC_V_Processor|output_hex_ascii:out_number|ascii_to_digit:comb_96                                                                             ; ascii_to_digit        ; work         ;
 ;    |pc_reg:pcreg0|                            ; 34 (34)             ; 32 (32)                   ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |RISC_V_Processor|pc_reg:pcreg0                                                                                                                  ; pc_reg                ; work         ;
-;    |register:reg0|                            ; 1457 (1457)         ; 992 (992)                 ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |RISC_V_Processor|register:reg0                                                                                                                  ; register              ; work         ;
+;    |register:reg0|                            ; 1466 (1466)         ; 992 (992)                 ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |RISC_V_Processor|register:reg0                                                                                                                  ; register              ; work         ;
 ;    |sig_translate:st0|                        ; 3 (3)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |RISC_V_Processor|sig_translate:st0                                                                                                              ; sig_translate         ; work         ;
 +-----------------------------------------------+---------------------+---------------------------+-------------+--------------+---------+-----------+------+--------------+--------------------------------------------------------------------------------------------------------------------------------------------------+-----------------------+--------------+
 Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
@@ -383,7 +383,6 @@ Note: number of Embedded Multiplier Blocks used is only available after a succes
 ; if_pc[2]                               ; Merged with if_pc_4[2]                      ;
 ; id_pc[2]                               ; Merged with id_pc_4[2]                      ;
 ; ex_pc[2]                               ; Merged with ex_pc_4[2]                      ;
-; clock32[1..31]                         ; Lost fanout                                 ;
 ; register:reg0|xx[0][0]                 ; Stuck at GND due to stuck port clock_enable ;
 ; register:reg0|xx[0][31]                ; Stuck at GND due to stuck port clock_enable ;
 ; register:reg0|xx[0][30]                ; Stuck at GND due to stuck port clock_enable ;
@@ -416,7 +415,7 @@ Note: number of Embedded Multiplier Blocks used is only available after a succes
 ; register:reg0|xx[0][3]                 ; Stuck at GND due to stuck port clock_enable ;
 ; register:reg0|xx[0][2]                 ; Stuck at GND due to stuck port clock_enable ;
 ; register:reg0|xx[0][1]                 ; Stuck at GND due to stuck port clock_enable ;
-; Total Number of Removed Registers = 86 ;                                             ;
+; Total Number of Removed Registers = 55 ;                                             ;
 +----------------------------------------+---------------------------------------------+
 
 
@@ -436,7 +435,6 @@ Note: number of Embedded Multiplier Blocks used is only available after a succes
 ;               ;                           ; register:reg0|xx[0][8], register:reg0|xx[0][7], register:reg0|xx[0][6],    ;
 ;               ;                           ; register:reg0|xx[0][5], register:reg0|xx[0][4], register:reg0|xx[0][3],    ;
 ;               ;                           ; register:reg0|xx[0][2], register:reg0|xx[0][1]                             ;
-; clock32[31]   ; Lost Fanouts              ; clock32[5], clock32[4], clock32[3], clock32[2], clock32[1]                 ;
 +---------------+---------------------------+----------------------------------------------------------------------------+
 
 
@@ -445,8 +443,8 @@ Note: number of Embedded Multiplier Blocks used is only available after a succes
 +----------------------------------------------+-------+
 ; Statistic                                    ; Value ;
 +----------------------------------------------+-------+
-; Total registers                              ; 1593  ;
-; Number of registers using Synchronous Clear  ; 46    ;
+; Total registers                              ; 1624  ;
+; Number of registers using Synchronous Clear  ; 78    ;
 ; Number of registers using Synchronous Load   ; 43    ;
 ; Number of registers using Asynchronous Clear ; 0     ;
 ; Number of registers using Asynchronous Load  ; 0     ;
@@ -461,63 +459,63 @@ Note: number of Embedded Multiplier Blocks used is only available after a succes
 ; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                               ;
 +--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------------------------------------+
 ; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |RISC_V_Processor|output_hex_ascii:out_number|control[0] ;
-; 3:1                ; 11 bits   ; 22 LEs        ; 22 LEs               ; 0 LEs                  ; Yes        ; |RISC_V_Processor|id_imm[26]                             ;
-; 3:1                ; 8 bits    ; 16 LEs        ; 16 LEs               ; 0 LEs                  ; Yes        ; |RISC_V_Processor|id_imm[12]                             ;
-; 3:1                ; 32 bits   ; 64 LEs        ; 64 LEs               ; 0 LEs                  ; Yes        ; |RISC_V_Processor|mem_pc_new[22]                         ;
-; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |RISC_V_Processor|register:reg0|xx[31][19]               ;
-; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |RISC_V_Processor|register:reg0|xx[30][11]               ;
-; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |RISC_V_Processor|register:reg0|xx[29][27]               ;
-; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |RISC_V_Processor|register:reg0|xx[28][15]               ;
-; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |RISC_V_Processor|register:reg0|xx[27][20]               ;
-; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |RISC_V_Processor|register:reg0|xx[26][19]               ;
-; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |RISC_V_Processor|register:reg0|xx[25][10]               ;
-; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |RISC_V_Processor|register:reg0|xx[24][23]               ;
-; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |RISC_V_Processor|register:reg0|xx[23][23]               ;
-; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |RISC_V_Processor|register:reg0|xx[22][3]                ;
-; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |RISC_V_Processor|register:reg0|xx[21][5]                ;
-; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |RISC_V_Processor|register:reg0|xx[20][10]               ;
-; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |RISC_V_Processor|register:reg0|xx[19][5]                ;
-; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |RISC_V_Processor|register:reg0|xx[18][7]                ;
-; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |RISC_V_Processor|register:reg0|xx[17][24]               ;
-; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |RISC_V_Processor|register:reg0|xx[16][18]               ;
-; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |RISC_V_Processor|register:reg0|xx[15][22]               ;
-; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |RISC_V_Processor|register:reg0|xx[14][17]               ;
-; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |RISC_V_Processor|register:reg0|xx[13][11]               ;
-; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |RISC_V_Processor|register:reg0|xx[12][24]               ;
-; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |RISC_V_Processor|register:reg0|xx[11][2]                ;
-; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |RISC_V_Processor|register:reg0|xx[10][20]               ;
-; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |RISC_V_Processor|register:reg0|xx[9][2]                 ;
-; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |RISC_V_Processor|register:reg0|xx[8][12]                ;
+; 3:1                ; 11 bits   ; 22 LEs        ; 22 LEs               ; 0 LEs                  ; Yes        ; |RISC_V_Processor|id_imm[27]                             ;
+; 3:1                ; 8 bits    ; 16 LEs        ; 16 LEs               ; 0 LEs                  ; Yes        ; |RISC_V_Processor|id_imm[13]                             ;
+; 3:1                ; 32 bits   ; 64 LEs        ; 64 LEs               ; 0 LEs                  ; Yes        ; |RISC_V_Processor|mem_pc_new[28]                         ;
+; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |RISC_V_Processor|register:reg0|xx[31][29]               ;
+; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |RISC_V_Processor|register:reg0|xx[30][16]               ;
+; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |RISC_V_Processor|register:reg0|xx[29][26]               ;
+; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |RISC_V_Processor|register:reg0|xx[28][18]               ;
+; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |RISC_V_Processor|register:reg0|xx[27][3]                ;
+; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |RISC_V_Processor|register:reg0|xx[26][21]               ;
+; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |RISC_V_Processor|register:reg0|xx[25][19]               ;
+; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |RISC_V_Processor|register:reg0|xx[24][9]                ;
+; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |RISC_V_Processor|register:reg0|xx[23][14]               ;
+; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |RISC_V_Processor|register:reg0|xx[22][23]               ;
+; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |RISC_V_Processor|register:reg0|xx[21][13]               ;
+; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |RISC_V_Processor|register:reg0|xx[20][17]               ;
+; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |RISC_V_Processor|register:reg0|xx[19][10]               ;
+; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |RISC_V_Processor|register:reg0|xx[18][24]               ;
+; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |RISC_V_Processor|register:reg0|xx[17][0]                ;
+; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |RISC_V_Processor|register:reg0|xx[16][30]               ;
+; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |RISC_V_Processor|register:reg0|xx[15][10]               ;
+; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |RISC_V_Processor|register:reg0|xx[14][20]               ;
+; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |RISC_V_Processor|register:reg0|xx[13][25]               ;
+; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |RISC_V_Processor|register:reg0|xx[12][9]                ;
+; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |RISC_V_Processor|register:reg0|xx[11][10]               ;
+; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |RISC_V_Processor|register:reg0|xx[10][12]               ;
+; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |RISC_V_Processor|register:reg0|xx[9][29]                ;
+; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |RISC_V_Processor|register:reg0|xx[8][16]                ;
 ; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |RISC_V_Processor|register:reg0|xx[7][20]                ;
-; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |RISC_V_Processor|register:reg0|xx[6][20]                ;
-; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |RISC_V_Processor|register:reg0|xx[5][20]                ;
-; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |RISC_V_Processor|register:reg0|xx[4][3]                 ;
-; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |RISC_V_Processor|register:reg0|xx[3][23]                ;
-; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |RISC_V_Processor|register:reg0|xx[2][9]                 ;
-; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |RISC_V_Processor|register:reg0|xx[1][1]                 ;
-; 3:1                ; 3 bits    ; 6 LEs         ; 3 LEs                ; 3 LEs                  ; Yes        ; |RISC_V_Processor|state[2]                               ;
-; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |RISC_V_Processor|pc_reg:pcreg0|pcnter[21]               ;
-; 4:1                ; 6 bits    ; 12 LEs        ; 6 LEs                ; 6 LEs                  ; Yes        ; |RISC_V_Processor|id_imm[10]                             ;
-; 5:1                ; 4 bits    ; 12 LEs        ; 8 LEs                ; 4 LEs                  ; Yes        ; |RISC_V_Processor|id_imm[3]                              ;
-; 5:1                ; 32 bits   ; 96 LEs        ; 96 LEs               ; 0 LEs                  ; Yes        ; |RISC_V_Processor|mem_reg_wb[30]                         ;
-; 33:1               ; 32 bits   ; 704 LEs       ; 704 LEs              ; 0 LEs                  ; Yes        ; |RISC_V_Processor|id_reg_r2[22]                          ;
-; 33:1               ; 32 bits   ; 704 LEs       ; 704 LEs              ; 0 LEs                  ; Yes        ; |RISC_V_Processor|id_reg_r1[5]                           ;
+; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |RISC_V_Processor|register:reg0|xx[6][8]                 ;
+; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |RISC_V_Processor|register:reg0|xx[5][3]                 ;
+; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |RISC_V_Processor|register:reg0|xx[4][26]                ;
+; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |RISC_V_Processor|register:reg0|xx[3][24]                ;
+; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |RISC_V_Processor|register:reg0|xx[2][19]                ;
+; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |RISC_V_Processor|register:reg0|xx[1][21]                ;
+; 3:1                ; 3 bits    ; 6 LEs         ; 3 LEs                ; 3 LEs                  ; Yes        ; |RISC_V_Processor|state[0]                               ;
+; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |RISC_V_Processor|pc_reg:pcreg0|pcnter[16]               ;
+; 4:1                ; 6 bits    ; 12 LEs        ; 6 LEs                ; 6 LEs                  ; Yes        ; |RISC_V_Processor|id_imm[8]                              ;
+; 5:1                ; 4 bits    ; 12 LEs        ; 8 LEs                ; 4 LEs                  ; Yes        ; |RISC_V_Processor|id_imm[2]                              ;
+; 5:1                ; 32 bits   ; 96 LEs        ; 96 LEs               ; 0 LEs                  ; Yes        ; |RISC_V_Processor|mem_reg_wb[8]                          ;
+; 33:1               ; 32 bits   ; 704 LEs       ; 704 LEs              ; 0 LEs                  ; Yes        ; |RISC_V_Processor|id_reg_r2[12]                          ;
+; 33:1               ; 32 bits   ; 704 LEs       ; 704 LEs              ; 0 LEs                  ; Yes        ; |RISC_V_Processor|id_reg_r1[20]                          ;
 ; 4:1                ; 8 bits    ; 16 LEs        ; 16 LEs               ; 0 LEs                  ; No         ; |RISC_V_Processor|led_out                                ;
 ; 3:1                ; 8 bits    ; 16 LEs        ; 16 LEs               ; 0 LEs                  ; No         ; |RISC_V_Processor|memory:mem0|store_data[26]             ;
-; 3:1                ; 8 bits    ; 16 LEs        ; 16 LEs               ; 0 LEs                  ; No         ; |RISC_V_Processor|memory:mem0|store_data[8]              ;
-; 3:1                ; 8 bits    ; 16 LEs        ; 16 LEs               ; 0 LEs                  ; No         ; |RISC_V_Processor|memory:mem0|store_data[0]              ;
-; 3:1                ; 8 bits    ; 16 LEs        ; 16 LEs               ; 0 LEs                  ; No         ; |RISC_V_Processor|memory:mem0|store_data[22]             ;
-; 4:1                ; 16 bits   ; 32 LEs        ; 32 LEs               ; 0 LEs                  ; No         ; |RISC_V_Processor|digit_write[4]                         ;
-; 4:1                ; 8 bits    ; 16 LEs        ; 16 LEs               ; 0 LEs                  ; No         ; |RISC_V_Processor|memory:mem0|q[12]                      ;
-; 4:1                ; 17 bits   ; 34 LEs        ; 34 LEs               ; 0 LEs                  ; No         ; |RISC_V_Processor|memory:mem0|q[19]                      ;
-; 5:1                ; 7 bits    ; 21 LEs        ; 14 LEs               ; 7 LEs                  ; No         ; |RISC_V_Processor|memory:mem0|q[6]                       ;
-; 8:1                ; 4 bits    ; 20 LEs        ; 20 LEs               ; 0 LEs                  ; No         ; |RISC_V_Processor|output_hex_ascii:out_number|oc[0]      ;
-; 24:1               ; 6 bits    ; 96 LEs        ; 72 LEs               ; 24 LEs                 ; No         ; |RISC_V_Processor|alu:alu0|res[14]                       ;
-; 24:1               ; 7 bits    ; 112 LEs       ; 84 LEs               ; 28 LEs                 ; No         ; |RISC_V_Processor|alu:alu0|res[18]                       ;
-; 25:1               ; 4 bits    ; 64 LEs        ; 52 LEs               ; 12 LEs                 ; No         ; |RISC_V_Processor|alu:alu0|res[5]                        ;
-; 25:1               ; 3 bits    ; 48 LEs        ; 39 LEs               ; 9 LEs                  ; No         ; |RISC_V_Processor|alu:alu0|res[26]                       ;
+; 3:1                ; 8 bits    ; 16 LEs        ; 16 LEs               ; 0 LEs                  ; No         ; |RISC_V_Processor|memory:mem0|store_data[12]             ;
+; 3:1                ; 8 bits    ; 16 LEs        ; 16 LEs               ; 0 LEs                  ; No         ; |RISC_V_Processor|memory:mem0|store_data[2]              ;
+; 3:1                ; 8 bits    ; 16 LEs        ; 16 LEs               ; 0 LEs                  ; No         ; |RISC_V_Processor|memory:mem0|store_data[18]             ;
+; 4:1                ; 16 bits   ; 32 LEs        ; 32 LEs               ; 0 LEs                  ; No         ; |RISC_V_Processor|digit_write[10]                        ;
+; 4:1                ; 8 bits    ; 16 LEs        ; 16 LEs               ; 0 LEs                  ; No         ; |RISC_V_Processor|memory:mem0|q[9]                       ;
+; 4:1                ; 17 bits   ; 34 LEs        ; 34 LEs               ; 0 LEs                  ; No         ; |RISC_V_Processor|memory:mem0|q[27]                      ;
+; 5:1                ; 7 bits    ; 21 LEs        ; 14 LEs               ; 7 LEs                  ; No         ; |RISC_V_Processor|memory:mem0|q[0]                       ;
+; 8:1                ; 4 bits    ; 20 LEs        ; 20 LEs               ; 0 LEs                  ; No         ; |RISC_V_Processor|output_hex_ascii:out_number|oc[2]      ;
+; 24:1               ; 6 bits    ; 96 LEs        ; 72 LEs               ; 24 LEs                 ; No         ; |RISC_V_Processor|alu:alu0|res[9]                        ;
+; 24:1               ; 7 bits    ; 112 LEs       ; 84 LEs               ; 28 LEs                 ; No         ; |RISC_V_Processor|alu:alu0|res[19]                       ;
+; 25:1               ; 4 bits    ; 64 LEs        ; 52 LEs               ; 12 LEs                 ; No         ; |RISC_V_Processor|alu:alu0|res[4]                        ;
+; 25:1               ; 3 bits    ; 48 LEs        ; 39 LEs               ; 9 LEs                  ; No         ; |RISC_V_Processor|alu:alu0|res[25]                       ;
 ; 26:1               ; 2 bits    ; 34 LEs        ; 26 LEs               ; 8 LEs                  ; No         ; |RISC_V_Processor|alu:alu0|res[3]                        ;
-; 26:1               ; 2 bits    ; 34 LEs        ; 28 LEs               ; 6 LEs                  ; No         ; |RISC_V_Processor|alu:alu0|res[29]                       ;
+; 26:1               ; 2 bits    ; 34 LEs        ; 28 LEs               ; 6 LEs                  ; No         ; |RISC_V_Processor|alu:alu0|res[28]                       ;
 +--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------------------------------------+
 
 
@@ -1323,30 +1321,30 @@ Note: In order to hide this table in the UI and the text report file, please set
 ; Type                  ; Count                       ;
 +-----------------------+-----------------------------+
 ; boundary_port         ; 39                          ;
-; cycloneiii_ff         ; 1593                        ;
+; cycloneiii_ff         ; 1624                        ;
 ;     ENA               ; 1512                        ;
 ;     ENA SCLR          ; 3                           ;
 ;     ENA SCLR SLD      ; 11                          ;
 ;     ENA SLD           ; 32                          ;
-;     SCLR              ; 32                          ;
-;     plain             ; 3                           ;
-; cycloneiii_lcell_comb ; 5296                        ;
-;     arith             ; 1529                        ;
+;     SCLR              ; 64                          ;
+;     plain             ; 2                           ;
+; cycloneiii_lcell_comb ; 5348                        ;
+;     arith             ; 1559                        ;
 ;         1 data inputs ; 12                          ;
-;         2 data inputs ; 180                         ;
+;         2 data inputs ; 210                         ;
 ;         3 data inputs ; 1337                        ;
-;     normal            ; 3767                        ;
+;     normal            ; 3789                        ;
 ;         0 data inputs ; 48                          ;
 ;         1 data inputs ; 17                          ;
-;         2 data inputs ; 220                         ;
-;         3 data inputs ; 476                         ;
-;         4 data inputs ; 3006                        ;
+;         2 data inputs ; 158                         ;
+;         3 data inputs ; 452                         ;
+;         4 data inputs ; 3114                        ;
 ; cycloneiii_mac_mult   ; 15                          ;
 ; cycloneiii_mac_out    ; 15                          ;
 ; cycloneiii_ram_block  ; 32                          ;
 ;                       ;                             ;
 ; Max LUT depth         ; 140.20                      ;
-; Average LUT depth     ; 40.34                       ;
+; Average LUT depth     ; 39.90                       ;
 +-----------------------+-----------------------------+
 
 
@@ -1365,7 +1363,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 21.1.0 Build 842 10/21/2021 SJ Lite Edition
-    Info: Processing started: Sat Nov 27 01:33:10 2021
+    Info: Processing started: Sat Nov 27 16:30:15 2021
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off RISC-V-Processor -c RISC-V-Processor
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
 Info (20030): Parallel compilation is enabled and will use 16 of the 32 processors detected
@@ -1402,8 +1400,8 @@ Warning (10036): Verilog HDL or VHDL warning at RISC_V_Processor.v(398): object 
 Warning (10036): Verilog HDL or VHDL warning at RISC_V_Processor.v(402): object "ex_reg_r2" assigned a value but never read File: C:/Users/zijia/Desktop/Homework/2021 Fall/Fundamentals of Digital Electronics/Lab4/RISC-V-Processor-ALTERA/RISC_V_Processor.v Line: 402
 Warning (10230): Verilog HDL assignment warning at RISC_V_Processor.v(452): truncated value with size 32 to match size of target (1) File: C:/Users/zijia/Desktop/Homework/2021 Fall/Fundamentals of Digital Electronics/Lab4/RISC-V-Processor-ALTERA/RISC_V_Processor.v Line: 452
 Warning (10230): Verilog HDL assignment warning at RISC_V_Processor.v(598): truncated value with size 32 to match size of target (16) File: C:/Users/zijia/Desktop/Homework/2021 Fall/Fundamentals of Digital Electronics/Lab4/RISC-V-Processor-ALTERA/RISC_V_Processor.v Line: 598
-Warning (10230): Verilog HDL assignment warning at RISC_V_Processor.v(630): truncated value with size 32 to match size of target (16) File: C:/Users/zijia/Desktop/Homework/2021 Fall/Fundamentals of Digital Electronics/Lab4/RISC-V-Processor-ALTERA/RISC_V_Processor.v Line: 630
-Warning (10230): Verilog HDL assignment warning at RISC_V_Processor.v(632): truncated value with size 16 to match size of target (4) File: C:/Users/zijia/Desktop/Homework/2021 Fall/Fundamentals of Digital Electronics/Lab4/RISC-V-Processor-ALTERA/RISC_V_Processor.v Line: 632
+Warning (10230): Verilog HDL assignment warning at RISC_V_Processor.v(641): truncated value with size 32 to match size of target (16) File: C:/Users/zijia/Desktop/Homework/2021 Fall/Fundamentals of Digital Electronics/Lab4/RISC-V-Processor-ALTERA/RISC_V_Processor.v Line: 641
+Warning (10230): Verilog HDL assignment warning at RISC_V_Processor.v(643): truncated value with size 16 to match size of target (4) File: C:/Users/zijia/Desktop/Homework/2021 Fall/Fundamentals of Digital Electronics/Lab4/RISC-V-Processor-ALTERA/RISC_V_Processor.v Line: 643
 Warning (10034): Output port "led_out[8]" at RISC_V_Processor.v(176) has no driver File: C:/Users/zijia/Desktop/Homework/2021 Fall/Fundamentals of Digital Electronics/Lab4/RISC-V-Processor-ALTERA/RISC_V_Processor.v Line: 176
 Info (12128): Elaborating entity "output_hex_ascii" for hierarchy "output_hex_ascii:out_number" File: C:/Users/zijia/Desktop/Homework/2021 Fall/Fundamentals of Digital Electronics/Lab4/RISC-V-Processor-ALTERA/RISC_V_Processor.v Line: 215
 Warning (10230): Verilog HDL assignment warning at RISC_V_Processor.v(98): truncated value with size 32 to match size of target (8) File: C:/Users/zijia/Desktop/Homework/2021 Fall/Fundamentals of Digital Electronics/Lab4/RISC-V-Processor-ALTERA/RISC_V_Processor.v Line: 98
@@ -1448,14 +1446,14 @@ Info (12021): Found 1 design units, including 1 entities, in source file db/alts
     Info (12023): Found entity 1: altsyncram_7st1 File: C:/Users/zijia/Desktop/Homework/2021 Fall/Fundamentals of Digital Electronics/Lab4/RISC-V-Processor-ALTERA/db/altsyncram_7st1.tdf Line: 28
 Info (12128): Elaborating entity "altsyncram_7st1" for hierarchy "memory:mem0|ram:ram0|altsyncram:altsyncram_component|altsyncram_7st1:auto_generated" File: c:/intelfpga_lite/21.1/quartus/libraries/megafunctions/altsyncram.tdf Line: 792
 Info (278001): Inferred 6 megafunctions from design logic
-    Info (278004): Inferred divider/modulo megafunction ("lpm_divide") from the following logic: "Mod0" File: C:/Users/zijia/Desktop/Homework/2021 Fall/Fundamentals of Digital Electronics/Lab4/RISC-V-Processor-ALTERA/RISC_V_Processor.v Line: 630
+    Info (278004): Inferred divider/modulo megafunction ("lpm_divide") from the following logic: "Mod0" File: C:/Users/zijia/Desktop/Homework/2021 Fall/Fundamentals of Digital Electronics/Lab4/RISC-V-Processor-ALTERA/RISC_V_Processor.v Line: 641
     Info (278003): Inferred multiplier megafunction ("lpm_mult") from the following logic: "alu:alu0|Mult0" File: C:/Users/zijia/Desktop/Homework/2021 Fall/Fundamentals of Digital Electronics/Lab4/RISC-V-Processor-ALTERA/ALU.v Line: 61
     Info (278003): Inferred multiplier megafunction ("lpm_mult") from the following logic: "alu:alu0|Mult1" File: C:/Users/zijia/Desktop/Homework/2021 Fall/Fundamentals of Digital Electronics/Lab4/RISC-V-Processor-ALTERA/ALU.v Line: 62
     Info (278003): Inferred multiplier megafunction ("lpm_mult") from the following logic: "alu:alu0|Mult2" File: C:/Users/zijia/Desktop/Homework/2021 Fall/Fundamentals of Digital Electronics/Lab4/RISC-V-Processor-ALTERA/ALU.v Line: 63
     Info (278004): Inferred divider/modulo megafunction ("lpm_divide") from the following logic: "alu:alu0|Div0" File: C:/Users/zijia/Desktop/Homework/2021 Fall/Fundamentals of Digital Electronics/Lab4/RISC-V-Processor-ALTERA/ALU.v Line: 73
     Info (278003): Inferred multiplier megafunction ("lpm_mult") from the following logic: "alu:alu0|Mult3" File: C:/Users/zijia/Desktop/Homework/2021 Fall/Fundamentals of Digital Electronics/Lab4/RISC-V-Processor-ALTERA/ALU.v Line: 74
-Info (12130): Elaborated megafunction instantiation "lpm_divide:Mod0" File: C:/Users/zijia/Desktop/Homework/2021 Fall/Fundamentals of Digital Electronics/Lab4/RISC-V-Processor-ALTERA/RISC_V_Processor.v Line: 630
-Info (12133): Instantiated megafunction "lpm_divide:Mod0" with the following parameter: File: C:/Users/zijia/Desktop/Homework/2021 Fall/Fundamentals of Digital Electronics/Lab4/RISC-V-Processor-ALTERA/RISC_V_Processor.v Line: 630
+Info (12130): Elaborated megafunction instantiation "lpm_divide:Mod0" File: C:/Users/zijia/Desktop/Homework/2021 Fall/Fundamentals of Digital Electronics/Lab4/RISC-V-Processor-ALTERA/RISC_V_Processor.v Line: 641
+Info (12133): Instantiated megafunction "lpm_divide:Mod0" with the following parameter: File: C:/Users/zijia/Desktop/Homework/2021 Fall/Fundamentals of Digital Electronics/Lab4/RISC-V-Processor-ALTERA/RISC_V_Processor.v Line: 641
     Info (12134): Parameter "LPM_WIDTHN" = "17"
     Info (12134): Parameter "LPM_WIDTHD" = "3"
     Info (12134): Parameter "LPM_NREPRESENTATION" = "UNSIGNED"
@@ -1801,7 +1799,6 @@ Warning (13024): Output pins are stuck at VCC or GND
     Warning (13410): Pin "decimal_out[3]" is stuck at GND File: C:/Users/zijia/Desktop/Homework/2021 Fall/Fundamentals of Digital Electronics/Lab4/RISC-V-Processor-ALTERA/RISC_V_Processor.v Line: 175
     Warning (13410): Pin "digit_out[0]" is stuck at GND File: C:/Users/zijia/Desktop/Homework/2021 Fall/Fundamentals of Digital Electronics/Lab4/RISC-V-Processor-ALTERA/RISC_V_Processor.v Line: 174
 Info (286030): Timing-Driven Synthesis is running
-Info (17049): 31 registers lost all their fanouts during netlist optimizations.
 Info (17016): Found the following redundant logic cells in design
     Info (17048): Logic cell "alu:alu0|lpm_mult:Mult1|mult_hdt:auto_generated|alt_mac_mult:mac_mult13|mac_mult_3vg1:auto_generated|mult_rql:mult1|op_2~0"
     Info (17048): Logic cell "alu:alu0|lpm_mult:Mult1|mult_hdt:auto_generated|alt_mac_mult:mac_mult13|mac_mult_3vg1:auto_generated|mult_rql:mult1|op_2~2"
@@ -1816,17 +1813,17 @@ Warning (21074): Design contains 3 input pin(s) that do not drive logic
     Warning (15610): No output dependent on input pin "button_in[1]" File: C:/Users/zijia/Desktop/Homework/2021 Fall/Fundamentals of Digital Electronics/Lab4/RISC-V-Processor-ALTERA/RISC_V_Processor.v Line: 179
     Warning (15610): No output dependent on input pin "button_in[2]" File: C:/Users/zijia/Desktop/Homework/2021 Fall/Fundamentals of Digital Electronics/Lab4/RISC-V-Processor-ALTERA/RISC_V_Processor.v Line: 179
     Warning (15610): No output dependent on input pin "button_in[3]" File: C:/Users/zijia/Desktop/Homework/2021 Fall/Fundamentals of Digital Electronics/Lab4/RISC-V-Processor-ALTERA/RISC_V_Processor.v Line: 179
-Info (21057): Implemented 6710 device resources after synthesis - the final resource count might be different
+Info (21057): Implemented 6762 device resources after synthesis - the final resource count might be different
     Info (21058): Implemented 13 input pins
     Info (21059): Implemented 26 output pins
-    Info (21061): Implemented 6609 logic cells
+    Info (21061): Implemented 6661 logic cells
     Info (21064): Implemented 32 RAM segments
     Info (21062): Implemented 30 DSP elements
 Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 131 warnings
-    Info: Peak virtual memory: 4922 megabytes
-    Info: Processing ended: Sat Nov 27 01:33:24 2021
+    Info: Peak virtual memory: 4914 megabytes
+    Info: Processing ended: Sat Nov 27 16:30:29 2021
     Info: Elapsed time: 00:00:14
-    Info: Total CPU time (on all processors): 00:00:21
+    Info: Total CPU time (on all processors): 00:00:22
 
 
 +------------------------------------------+

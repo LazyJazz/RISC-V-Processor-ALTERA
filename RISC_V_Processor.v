@@ -134,7 +134,7 @@ module pc_reg(input cpu_clk, input stall, input [31:0] new_pc, output [31:0] pc,
 		if (!stall && !rst)
 			pcnter <= new_pc;
 		else if (rst)
-			pcnter <= 32'h00000034;
+			pcnter <= 32'h00003ff8;
 	end
 endmodule
 
@@ -192,7 +192,7 @@ module RISC_V_Processor(switch_in, button_in, led_out, cs_out, decimal_out, digi
 	wire [15:0] new_state;
 
 	wire rst;
-	assign rst = button_in[0];
+	assign rst = (clock32 < 256);//button_in[0];
 	wire is_end;
 	
 	reg init_bit;
@@ -624,7 +624,18 @@ module RISC_V_Processor(switch_in, button_in, led_out, cs_out, decimal_out, digi
 	
 	always @ (posedge clk)
 	begin
-		clock32 <= clock32_new;
+		if (button_in[0])
+		begin
+			clock32 <= 0;
+		end
+		else
+		begin
+			clock32[30:0] <= clock32_new[30:0];
+			if (clock32 > 100)
+			begin
+				clock32[31] <= 1;
+			end
+		end
 	end
 	
 	assign new_state = (state + 1) % 5;
