@@ -77,7 +77,7 @@ module output_int32_ascii(input clk, input [31:0] value, input error, input div,
 	end
 endmodule
 
-module output_hex_ascii(input clk, input [31:0] value, output [7: 0] digit_channel, output [3:0] cs_out);
+module output_data(input clk, input [31:0] value, output [7: 0] digit_channel, output [3:0] cs_out, input use_hex);
 	wire [7:0] c0;
 	wire [7:0] c1;
 	wire [7:0] c2;
@@ -100,11 +100,17 @@ module output_hex_ascii(input clk, input [31:0] value, output [7: 0] digit_chann
 	assign c2 = (d2 < 10) ? (d2 + 48) : (d2+55);
 	assign c3 = (d3 < 10) ? (d3 + 48) : (d3+55);
 	assign cs_out = ~control;
-	assign digit_channel[0] = 0;
+	//assign digit_channel[0] = 0;
 	assign oc = control[0] ? c0 : (
 					control[1] ? c1 : (
 					control[2] ? c2 : c3));
-	ascii_to_digit(oc, digit_channel[7:1]);
+	wire [7:0] ascii_decoder_out;
+	assign ascii_decoder_out[0] = 0;
+	ascii_to_digit a2d0(oc, ascii_decoder_out[7:1]);
+	assign digit_channel = (use_hex ? ascii_decoder_out : (
+					control[0] ? value[7:0] : (
+					control[1] ? value[15:8] : (
+					control[2] ? value[23:16] : value[31:24]))));
 	
 	assign control_new =
 							control[0] ? 4'b0010 : (
@@ -170,15 +176,59 @@ module sig_translate(
 	assign sig_wb = Rtype || Itype || Utype || Jtype;
 endmodule 
 
-module RISC_V_Processor(switch_in, button_in, led_out, cs_out, decimal_out, digit_out,clk);
+module keypad_controller(clk, keypad_out, keypad_in, key_res);
+	input clk;
+	output [3:0] keypad_out;
+	input [3:0] keypad_in;
+	output [15:0] key_res;
+	reg [3:0] scan_node;
+	reg [15:0] scan_res;
+	wire [3:0] scan_node_new;
+	assign keypad_out = scan_node;
+	assign scan_node_new = (
+		scan_node[0] ? 4'b0010 : (
+		scan_node[1] ? 4'b0100 : (
+		scan_node[2] ? 4'b1000 : 4'b0001
+		)
+	));
+	assign key_res = scan_res;
+	
+	always @ (negedge clk)
+	begin
+		scan_node <= scan_node_new;
+	end
+	
+	always @ (posedge clk)
+	begin
+		if (scan_node[0])
+			scan_res[3:0] <= keypad_in;
+		if (scan_node[1])
+			scan_res[7:4] <= keypad_in;
+		if (scan_node[2])
+			scan_res[11:8] <= keypad_in;
+		if (scan_node[3])
+			scan_res[15:12] <= keypad_in;
+	end
+endmodule
+
+module RISC_V_Processor(switch_in, button_in, led_out, cs_out, decimal_out, digit_out, keypad_out, keypad_in,clk);
 	output [7: 0] digit_out;
 	output [3: 0] decimal_out;
 	output [9: 0] led_out;
 	output [3: 0] cs_out;
 	input [7: 0] switch_in;
 	input [3: 0] button_in;
+	output [3:0] keypad_out;
+	input [3:0] keypad_in;
 	wire [31:0] __rubish;
+	wire [15:0] key_res;
 	input clk;
+	reg [63:0] u64_clk_cnt;
+	wire [63:0] u64_clk_cnt_1;
+	assign u64_clk_cnt_1 = u64_clk_cnt + 1;
+	
+	keypad_controller
+		kc0(clk, keypad_out,keypad_in, key_res);
 	//register
 	//	reg0(button_in[3], 0, switch_in[4:0], switch_in[4:0], switch_in[4:0], switch_in, button_in[2], led_out, __rubish);
 /****Define CPU Clock Speed****/
@@ -211,8 +261,8 @@ module RISC_V_Processor(switch_in, button_in, led_out, cs_out, decimal_out, digi
 		
 /***digit module***/
 	wire[31:0] digit_write;
-	output_hex_ascii
-		out_number(clk, digit_write, digit_out, cs_out);
+	output_data
+		out_number(clk, digit_write, digit_out, cs_out, switch_in[7]);
 /******************/
 
 
@@ -499,18 +549,29 @@ module RISC_V_Processor(switch_in, button_in, led_out, cs_out, decimal_out, digi
 		)
 	);
 	
+	wire [31:0] sys_metrics[7:0];
+	assign sys_metrics[0] = key_res;
+	assign sys_metrics[1] = switch_in;
+	assign sys_metrics[2] = button_in;
+	assign sys_metrics[3] = 0;
+	assign sys_metrics[4] = u64_clk_cnt[31:0];
+	assign sys_metrics[5] = u64_clk_cnt[63:32];
+	assign sys_metrics[6] = 0;
+	assign sys_metrics[7] = 0;
+	
 	assign mem_wire_reg_sig_wb = ex_sig_wb;
 	assign mem_wire_reg_rd = ex_inst[11:7];
+	wire mem_inst_is_lui;
+	assign mem_inst_is_lui = (mem_wire_opcode == 7'b0110111);
+	wire mem_inst_is_auipc;
+	assign mem_inst_is_auipc = (mem_wire_opcode == 7'b0010111);
 	assign mem_wire_reg_wb = (
-		(mem_wire_opcode == 7'b0110111) ? (ex_imm) : //LUI
+		(mem_inst_is_lui || mem_inst_is_auipc) ? (mem_inst_is_lui ? ex_imm : (ex_imm + ex_pc)) :
 		(
-		(mem_wire_opcode == 7'b0010111) ? (ex_pc + ex_imm) : //AUIPC
+		(ex_sig_jump || !ex_sig_load) ? ( ex_sig_jump ? ex_pc_4 : ex_wire_alu_res) : //JAL return pc+4
 		(
-		(ex_sig_jump) ? (ex_pc_4) : //JAL return pc+4
-		(
-		(ex_sig_load) ? (mem_out) : // Load instructions
-		(ex_wire_alu_res) // Rtype or Itype
-		)
+			(mem_addr[31:14]) ? (
+			(mem_addr[31:5] == 27'b000000000000000100000000000) ? (sys_metrics[mem_addr[4:2]]) : 0) : mem_out
 		)
 		)
 	);
@@ -539,13 +600,13 @@ module RISC_V_Processor(switch_in, button_in, led_out, cs_out, decimal_out, digi
 	assign reg_wb = mem_reg_wb;
 	assign reg_sig_wb = mem_reg_sig_wb;
 	assign pc_new = mem_pc_new;
-//	always @ (posedge cpu_clk)
-//	begin
-//		if (state == 4 && reg_sig_wb && reg_rd)
-//		begin
-//			xx[reg_rd] <= reg_wb;
-//		end
-//	end
+	always @ (posedge cpu_clk)
+	begin
+		if (state == 4)
+		begin
+			u64_clk_cnt <= u64_clk_cnt + 1;
+		end
+	end
 /*******************************************************/
 
 
@@ -595,13 +656,15 @@ module RISC_V_Processor(switch_in, button_in, led_out, cs_out, decimal_out, digi
 //	(switch_in[7:4] == 4'b1110) ? mem_wire_opcode :(
 //	(switch_in[7:4] == 4'b1111) ? ex_imm : 0
 //	))))))))))))))));
-	assign digit_write[15:0] = (
-	(switch_in == 0) ? led_word[15:0]: (
-	(switch_in == 1) ? led_word[31:16]: (
-	(switch_in == 2) ? pc: 0
-	)
+	assign digit_write[15:0] = switch_in[7] ?  (
+	(switch_in[6:0] == 0) ? led_word[15:0]: (
+	(switch_in[6:0] == 1) ? led_word[31:16]: (
+	(switch_in[6:0] == 2) ? pc: (
+	(switch_in[6:0] == 3) ? key_res: 0
+	)))) : led_word[15:0];
 	
-	));
+	assign digit_write[31:16] = led_word[31:16];
+	
 	
 	assign is_end = (pc == 32'b11111111111111111111111111111111);
 	
@@ -624,7 +687,7 @@ module RISC_V_Processor(switch_in, button_in, led_out, cs_out, decimal_out, digi
 	
 	always @ (posedge clk)
 	begin
-		if (button_in[0])
+		if (switch_in == 8'hff)
 		begin
 			clock32 <= 0;
 		end
